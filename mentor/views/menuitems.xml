@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <menuitem id="menu_mentee_admission_root"
+              name="Mentee Admission"
+              action="action_mentee_admission"
+              sequence="10"/>
+</odoo>

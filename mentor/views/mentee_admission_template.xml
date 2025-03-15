@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='menu_admission_form' model='website.menu'>
+        <field name='name'>Application Form</field>
+        <field name='url'>/apply_now</field>
+        <field name='parent_id' ref='website.main_menu'/>
+        <field name='sequence'>55</field>
+    </record>
+
+    <template id="admission_form_template" name="Mentee Admission Form">
+        <t t-call="website.layout">
+            <div class="container mt-4 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-center">Mentee Admission Application</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="/admission/submit" method="post" class="o_mark_required" enctype="multipart/form-data">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            
+                            <!-- Mentee Details Section -->
+                            <h4 class="mt-4 mb-3">Mentee Details</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="first_name" class="form-label">First Name</label>
+                                        <input type="text" class="form-control" name="first_name" required="1"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="last_name" class="form-label">Last Name</label>
+                                        <input type="text" class="form-control" name="last_name" required="1"/>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="dob" class="form-label">Date of Birth</label>
+                                        <input type="date" class="form-control" name="dob" required="1"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="gender" class="form-label">Gender</label>
+                                        <select class="form-select" name="gender" required="1">
+                                            <option value="">Select Gender</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" name="email" required="1"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="phone" class="form-label">Phone</label>
+                                        <input type="tel" class="form-control" name="phone" required="1"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="country" class="form-label">Nationality</label>
+                                        <select class="form-select" name="country">
+                                            <option value="">Select Country</option>
+                                            <t t-foreach="countries" t-as="country">
+                                                <option t-att-value="country.id"><t t-esc="country.name"/></option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="clas" class="form-label">Class</label>
+                                        <select class="form-select" name="clas">
+                                            <option value="">Select Class</option>
+                                            <option value="p1-p2">P1-P2</option>
+                                            <option value="p3-p4">P3-P4</option>
+                                            <option value="p5-p7">P5-P7</option>
+                                            <option value="s1-s4">S1-S4</option>
+                                            <option value="s5-s6">S5-S6</option>
+                                            <option value="s6_vacist">S6 Vacist</option>
+                                            <option value="other tertiary student">Other Tertiary Student</option>
+                                            <option value="non student">Non Student</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Parent Details Section -->
+                            <h4 class="mt-4 mb-3">Parent/Guardian Details</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="pfname" class="form-label">First Name</label>
+                                        <input type="text" class="form-control" name="pfname" required="1"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="plname" class="form-label">Last Name</label>
+                                        <input type="text" class="form-control" name="plname"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="nationality" class="form-label">Nationality</label>
+                                        <select class="form-select" name="nationality">
+                                            <option value="">Select Country</option>
+                                            <t t-foreach="countries" t-as="country">
+                                                <option t-att-value="country.id"><t t-esc="country.name"/></option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="tel" class="form-label">Telephone</label>
+                                        <input type="tel" class="form-control" name="tel" required="1"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="mobile" class="form-label">Mobile</label>
+                                        <input type="tel" class="form-control" name="mobile"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="city" class="form-label">City</label>
+                                        <input type="text" class="form-control" name="city"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="occupation" class="form-label">Occupation</label>
+                                        <input type="text" class="form-control" name="occupation"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="pemail" class="form-label">Email</label>
+                                        <input type="email" class="form-control" name="pemail"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="district" class="form-label">District</label>
+                                        <input type="text" class="form-control" name="district" required="1"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="subcounty" class="form-label">Subcounty</label>
+                                        <input type="text" class="form-control" name="subcounty"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Contact Person Details -->
+                            <h4 class='mt-4 mb-3'>Contact Person Details </h4>
+                            <div class='row'>
+                                <div class='col-md-6'>
+                                    <div class='form-group mb-3'>
+                                        <label for='contact_name' class='form-label'>Name</label>
+                                        <input type='text' class='form-control' name='contact_name'/>
+                                    </div>
+                                </div>
+                                <div class='col-md-6'>
+                                    <div class='form-group mb-3'>
+                                        <label for='relation' class='form-label'>Relationship with Mentee</label>
+                                        <select class='form-select'  name='relation'>
+                                            <option value=''>Select</option>
+                                            <option value='father'>Father</option>
+                                            <option value='mother'>Mother</option>
+                                            <option value='guardian'>Guardian</option>
+                                            <option value='brother'>Brother</option>
+                                            <option value='sister'>Sister</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='row'>
+                                <div class='col-md-6'>
+                                    <div class='form-group mb-3'>
+                                        <label for='contact_mobile' class='form-label'>Mobile</label>
+                                        <input type='text' class='form-control' name='contact_mobile'/>
+                                    </div>
+                                    <div class='form-group mb-3'>
+                                        <label for='contact_address' class='form-label'>Address</label>
+                                        <input type='text' class='form-control' name='contact_address'/>
+                                    </div>
+                                </div>
+                                <div class='col-md-6'>
+                                    <div class='form-group mb-3'>
+                                        <label for ='contact_tel'  class='form-label'>Tel</label>
+                                        <input type='text' class='form-control' name='contact_tel'/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Education Background Section -->
+                            <h4 class="mt-4 mb-3">Education Background</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="current_school" class="form-label">Current School</label>
+                                        <input type="text" class="form-control" name="current_school"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label for="time_in_sch" class="form-label">Time in Current School</label>
+                                        <input type="text" class="form-control" name="time_in_sch"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn btn-primary">Submit Application</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="admission_thanks" name="Thank You">
+        <t t-call="website.layout">
+            <div class="container mt-5">
+                <div class="jumbotron text-center">
+                    <h2>Thank You!</h2>
+                    <p>Your application has been submitted successfully.</p>
+                    <p>Your application number is: <strong><t t-esc="application.app_number"/></strong></p>
+                    <p>We will contact you soon regarding your application.</p>
+                    <a href="/" class="btn btn-primary mt-3">Return to Home</a>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
